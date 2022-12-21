@@ -1,0 +1,31 @@
+function Line(ctx, x0, y0, x1, y1) { 
+        var delta_x = Math.abs(x1 - x0), delta_y = Math.abs(y1 - y0); 
+        var delta_max = Math.max(delta_x, delta_y), delta_min = Math.min(delta_x, delta_y); 
+        var direct_x = 1, direct_y = 1; 
+        var eps = 0; 
+        var s = 1; 
+        var k = 2 * delta_min; 
+        if (x1 < x0) direct_x = -1; 
+        if (y1 < y0) direct_y = -1; 
+        if (delta_y <= delta_x) { 
+            var y = y0; 
+            for (var x = x0; x * direct_x <= x1 * direct_x; x += direct_x) { 
+                ctx.fillRect(x * s, y * s, 1 * s, 1 * s); 
+                eps = eps + k; 
+                if (eps > delta_max) { 
+                    y += direct_y; 
+                    eps = eps - 2 * delta_max; 
+                } 
+            } 
+        } else { 
+            var x = x0; 
+            for (var y = y0; y * direct_y <= y1 * direct_y; y += direct_y) { 
+                ctx.fillRect(x * s, y * s, 1 * s, 1 * s); 
+                eps = eps + k; 
+                if (eps > delta_max) { 
+                    x += direct_x; 
+                    eps = eps - 2 * delta_max; 
+                } 
+            } 
+        } 
+    }
