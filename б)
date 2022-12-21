@@ -1,0 +1,46 @@
+function BresehamCircle(xStart, yStart, raduisCircle) {
+	ctx.fillStyle = "#ff0000";
+	let x = xStart;
+	let y = yStart;
+	xStart = 0;
+	yStart = raduisCircle;
+	let delta = (2 - 2 * raduisCircle);
+	let beta = 0;
+	while (yStart >= 0) {
+		// рисуем дуги для всех четвертей
+		ctx.fillRect(x + xStart, y + yStart, 1, 1);
+		ctx.fillRect(x + xStart, y - yStart, 1, 1);
+		ctx.fillRect(x - xStart, y + yStart, 1, 1);
+		ctx.fillRect(x - xStart, y - yStart, 1, 1);
+		if (delta < 0) {
+			beta = 2 * (delta + yStart) - 1;
+			if (beta <= 0) {
+				xStart++;
+				delta += (2 * xStart + 1);
+				continue;
+			}
+			if (beta > 0) {
+				xStart++;
+				yStart--;
+				delta += 2 * xStart - 2 * yStart + 2;
+			}
+		}
+		if (delta > 0 || delta === 0) {
+			beta = 2 * (delta - xStart) - 1;
+			if (beta <= 0) {
+				xStart++;
+				yStart--;
+				delta += 2 * xStart - 2 * yStart + 2;
+				continue;
+			}
+			if (beta > 0) {
+				yStart--;
+				delta += (1 - 2 * yStart);
+
+			}
+		}
+
+
+	}
+
+}
